@@ -12,9 +12,5 @@ Original file is located at
 import streamlit as st
 
 
-
-import plotly as pt
-import pandas as pd
-
 st.write("hello worrld")
 
