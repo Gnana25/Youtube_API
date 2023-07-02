@@ -7,11 +7,11 @@ Original file is located at
     https://colab.research.google.com/drive/1FIAvADVjjCroHvYsgAsfMIj9EYDRkbHD
 """
 
-pip install streamlit
+
 
 import streamlit as st
 
-pip install plotly
+
 
 import plotly as pt
 import pandas as pd
