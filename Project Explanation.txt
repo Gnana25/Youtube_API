@@ -1,1 +1,9 @@
-
+Get API key from youtube
+Using API key collect the required data
+Create & save dict
+create a database in mogodb
+show the data in unstructed formal 
+connect to mysql
+show data in structed format
+create a website app using streamlit
+display the collected data in that website
