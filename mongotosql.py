@@ -1,13 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
 
-# In[5]:
-
-
-get_ipython().system('pip3 install mysql-connector-python')
-
-
-# In[6]:
 
 
 import mysql.connector
@@ -24,28 +15,10 @@ print(mydb)
 mycursor = mydb.cursor(buffered=True)
 
 
-# In[7]:
-
-
-mycursor.execute("select * from youtube_api.channel")
-print(mycursor)
-for x in mycursor:
-  print(x)
-
-
-# In[ ]:
 
 
 mycursor.execute("CREATE DATABASE Youtube_API")
 
-
-# In[9]:
-
-
-mycursor.execute("SHOW tables from youtube_api")
-
-for x in mycursor:
-  print(x)
 
 
 # In[10]:
@@ -55,7 +28,7 @@ mycursor.execute("""
     CREATE TABLE IF NOT EXISTS youtube_api.Channel (
         name VARCHAR(255),
         id VARCHAR(255),
-        subscription_count VARCHAR(255),
+        subscription_count int(255),
         channel_views VARCHAR(255),
         channel_description VARCHAR(1000)
     )
@@ -73,22 +46,16 @@ mycursor.execute("""
         description VARCHAR(255),
         tags VARCHAR(255),
         published_at VARCHAR(255),
-        view_count VARCHAR(255),
-        like_count VARCHAR(255),
-        favourite_count VARCHAR(255),
-        comment_count VARCHAR(255),
-        dislike_count VARCHAR(255),
+        view_count int(255),
+        like_count int(255),
+        favourite_count int(255),
+        comment_count int(255),
+        dislike_count int(255),
         duration VARCHAR(255),
         thumbnail VARCHAR(255),
         caption VARCHAR(255)
     )
 """)
-
-
-# In[12]:
-
-
-get_ipython().system('pip install pymongo')
 
 
 # In[13]:
@@ -104,8 +71,6 @@ uri = "mongodb+srv://gnanavel:abcd@cluster0.hqbjvfl.mongodb.net/?retryWrites=tru
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
 
-#record.insert_one({'name':'gnana','ph':'12345'})
-# Send a ping to confirm a successful connection
 try:
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
@@ -125,27 +90,9 @@ records= db.Channel
 
 # In[15]:
 
-
-# x=records.find_one({"address":"mumbai"})
 client = MongoClient(uri, server_api=ServerApi('1')).Youtube_to_SQL.Channel
 
-#print(x)
-channel_list_id=['CNN','Jayaprakash Raveendran','BBC News','Thanthi TV','T-Series Tamil','Channel 4 News','sonymusicsouth','Saregama Tamil']
-for i in channel_list_id:
-    #print(i)
-    y=records.find({"name":i})
-    for x in y:
-        print(x)
-        
 
-
-# In[16]:
-
-
-# x=records.find_one({"address":"mumbai"})
-client = MongoClient(uri, server_api=ServerApi('1')).Youtube_to_SQL.Channel
-
-#print(x)
 channel_list_id=['CNN','Jayaprakash Raveendran','BBC News','Thanthi TV','T-Series Tamil','Channel 4 News','sonymusicsouth','Saregama Tamil']
 for i in channel_list_id:
     #print(i)
@@ -185,8 +132,6 @@ uri = "mongodb+srv://gnanavel:abcd@cluster0.hqbjvfl.mongodb.net/?retryWrites=tru
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
 
-#record.insert_one({'name':'gnana','ph':'12345'})
-# Send a ping to confirm a successful connection
 try:
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
@@ -202,7 +147,6 @@ except Exception as e:
 import pymongo
 db= client.Youtube_to_SQL
 records= db.Video
-# x=records.find_one({"address":"mumbai"})
 
 
 # In[21]:
@@ -210,15 +154,11 @@ records= db.Video
 
 client = MongoClient(uri, server_api=ServerApi('1')).Youtube_to_SQL.Video
 
-#print(x)
 channel_list_id=['CNN','Jayaprakash Raveendran','BBC News','Thanthi TV','T-Series Tamil','Channel 4 News','sonymusicsouth','Saregama Tamil']
 y=records.find()
 for x in y:
-    #print(i)
     query= 'INSERT INTO youtube_api.video VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
-    #print(x)
     mycursor.execute(query, (x['channel_name'], x['id'], x['name'],x['description'],x['tags'],x['published_at'],x['view_count'],x['like_count'],x['favourite_count'],x['comment_count'],x['dislike_count'],x['duration'],x['thumbnail'],x['caption']))
-    #mycursor.execute(query)
         
 
 
@@ -234,17 +174,6 @@ mydb.commit()
 mycursor.execute("select * from youtube_api.video")
 for x in mycursor:
   print(x)
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
 
 
 
