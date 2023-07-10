@@ -37,27 +37,27 @@ mycursor.execute("""SELECT distinct view_count AS video_view_count, channel_name
                             """)
 df = pd.DataFrame(mycursor.fetchall(),columns=mycursor.column_names)
 st.write(df)
-st.write("4>What is the comment count with video name from video")
+st.write("4.How many comments were made on each video, and what are their corresponding video names?")
 mycursor.execute("""SELECT distinct comment_count AS comment_count_of_a_video,name as video_name
                             FROM youtube_api.video
                             WHERE comment_count >0
-                            """)
+                            """
 df = pd.DataFrame(mycursor.fetchall(),columns=mycursor.column_names)
 st.write(df)
-st.write("5>What is the like count with channel name & video name ")
+st.write("5. Which videos have the highest number of likes, and what are their corresponding channel names? ")
 mycursor.execute("""SELECT distinct like_count AS like_count_of_a_video,channel_name,name as video_name
                             FROM youtube_api.video
-                            order by like_count >0
+                            order by like_count desc
                             """)
 df = pd.DataFrame(mycursor.fetchall(),columns=mycursor.column_names)
 st.write(df)
-st.write("6>Wht is like count, dislike count with channel name & video name ")
+st.write("6. What is the total number of likes and dislikes for each video, and what are their corresponding video names? ")
 mycursor.execute("""SELECT distinct like_count AS like_count_of_a_video,dislike_count as dislike_count_of_a_video,channel_name,name as video_name
                             FROM youtube_api.video
                             """)
 df = pd.DataFrame(mycursor.fetchall(),columns=mycursor.column_names)
 st.write(df)
-st.write("7>What is the maximum comment count with channel name")
+st.write("7. Which videos have the highest number of comments, and what are their corresponding channel names?")
 mycursor.execute("""SELECT channel_name , max(comment_count)
                             FROM youtube_api.video
                             group by channel_name
@@ -65,21 +65,21 @@ mycursor.execute("""SELECT channel_name , max(comment_count)
                             """)
 df = pd.DataFrame(mycursor.fetchall(),columns=mycursor.column_names)
 st.write(df)
-st.write("8>What is the view count with channel name")
+st.write("8. What is the total number of views for each channel, and what are their corresponding channel names?")
 mycursor.execute("""SELECT distinct channel_views, name as  channel_name
                             FROM youtube_api.channel
                             ORDER by channel_views >0
                             """)
 df = pd.DataFrame(mycursor.fetchall(),columns=mycursor.column_names)
 st.write(df)
-st.write("9>Which videos have the highest number of comments &their corresponding channel names")
+st.write("9. Which is the top 10 comment count &their corresponding channel names")
 mycursor.execute("""SELECT distinct channel_name AS Channel_Name,id AS Video_ID,comment_count AS Comment_Count
                             FROM youtube_api.video
                             ORDER BY comment_count DESC
                             LIMIT 10""")
 df = pd.DataFrame(mycursor.fetchall(),columns=mycursor.column_names)
 st.write(df)
-st.write("10>What is the subcription count for each channel")
+st.write("10. What is the subcription count for each channel")
 mycursor.execute("""SELECT distinct name AS Channel_Name,subscription_count
                             FROM youtube_api.channel
                             """)
