@@ -136,8 +136,37 @@ for j in range(0,8):
     x_dict['caption'] = caption
 
     v_list.append(x_dict)
+
   final_list.append(v_list)
   v_dict[channel_list[j]] = v_list
 
 final_list
+
+
+import pymongo
+
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+
+uri = "mongodb+srv://gnanavel:abcd@cluster0.hqbjvfl.mongodb.net/?retryWrites=true&w=majority"
+
+# Create a new client and connect to the server
+client = MongoClient(uri, server_api=ServerApi('1'))
+
+# Send a ping to confirm a successful connection
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print(e)
+
+db = client.Youtube_to_SQL
+record = db.Channel
+
+record.insert_many(f_list)
+
+db = client.Youtube_to_SQL
+record = db.Video
+
+record.insert_many(final_list)
 
